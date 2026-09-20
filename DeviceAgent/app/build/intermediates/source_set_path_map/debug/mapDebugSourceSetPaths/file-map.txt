@@ -1,0 +1,7 @@
+com.aman.deviceagent.app-pngs-0 C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\build\generated\res\pngs\debug
+com.aman.deviceagent.app-resValues-1 C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\build\generated\res\resValues\debug
+com.aman.deviceagent.app-packageDebugResources-2 C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.aman.deviceagent.app-packageDebugResources-3 C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.aman.deviceagent.app-debug-4 C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.aman.deviceagent.app-debug-5 C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\debug\res
+com.aman.deviceagent.app-main-6 C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\res

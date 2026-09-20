@@ -1,0 +1,3 @@
+com.aman.deviceagent:xml/device_admin = 0x7f020001
+com.aman.deviceagent:xml/accessibility_service_config = 0x7f020000
+com.aman.deviceagent:string/app_name = 0x7f010000

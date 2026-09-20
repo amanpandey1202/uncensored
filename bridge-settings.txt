@@ -1,0 +1,43 @@
+# ============================================================
+#  PC side config for the bridge (phone <-> PC command link)
+#  Used by: bridge.ps1, md-remote.ps1, guard.ps1
+# ============================================================
+
+# Where the PC bridge HTTP server listens.
+#   0.0.0.0 = any network interface (reachable from LAN and Tailscale)
+LISTEN=0.0.0.0
+PORT=8765
+
+# Shared token. If non-empty, every request must include ?token=....
+# The MacroDroid macros embed this token in their URL, same for the Agent APK.
+TOKEN=
+
+# ============================================================
+#  Phones.  One line per phone:
+#  name|md-http-port|md-webhook-device-id|agent-port
+#
+#  md-http-port       : MacroDroid local HTTP Server port (set once in
+#                       MacroDroid Settings -> HTTP Server). Default 8080.
+#                       *** FIX: Enable MacroDroid HTTP Server on each phone ***
+#                       MacroDroid -> Settings -> HTTP Server -> ON.
+#                       Each phone must use a different port if on the same LAN.
+#  md-webhook-device-id: MacroDroid "Export Device ID" value (needed only if
+#                       you also use cloud webhooks / ask-the-phone). Leave
+#                       empty to skip.   Example: c306bcd7-5f78-4895-bee4-...
+#  agent-port         : port the DeviceAgent APK listens on. 8766 default.
+#
+#  The phone->PC connection (MacroDroid -> this PC) always uses this PC:
+#    PC Tailscale = 0.0.0.0   (YOUR_PC)
+#    PC LAN       = whatever 'ipconfig' shows at home.
+#  Make sure the bridge-install.bat urlacl + firewall rule were applied ONCE.
+# ============================================================
+
+# Phone1 = v2420 (LAN: 192.168.1.101, Tailscale: 1.1.1.1)
+#          MacroDroid HTTP Server on port 8080 -- must be ENABLED on the phone.
+Phone1|8080||8766
+# Phone2 = SM-A155F (Samsung Galaxy A15) at 192.168.1.102
+#          MacroDroid HTTP Server on port 8081 -- must be ENABLED on the phone.
+Phone2|8081||8766
+# Phone3 = device at 192.168.1.103 -- verify IP with wifi-settings.txt
+#          MacroDroid HTTP Server on port 8082 -- must be ENABLED on the phone.
+Phone3|8082||8766

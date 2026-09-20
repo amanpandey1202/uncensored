@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phone Setup Hub</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --line:#242a33; --txt:#e6edf3;
+    --dim:#8b949e; --green:#3fb950; --amber:#d29922; --gray:#565d66;
+    --blue:#58a6ff; --blue-btn:#1f6feb; --blue-hover:#388bfd; --err:#f85149;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:28px;max-width:820px;margin:0 auto}
+  h1{font-size:22px;font-weight:600;letter-spacing:-0.02em}
+  header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:20px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px}
+  h2{font-size:16px;font-weight:600;margin-bottom:12px}
+  h2 .step{color:var(--blue);margin-right:8px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  label{color:var(--dim);font-size:12px;display:block;margin-bottom:2px}
+  input,select{background:#0b0f14;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:8px 10px;font:13px ui-monospace,Consolas,monospace}
+  input:focus,select:focus{outline:none;border-color:var(--blue)}
+  .gr{flex:1;min-width:160px}
+  .btn{border:0;border-radius:8px;padding:9px 16px;font:600 13px system-ui;cursor:pointer;transition:background .15s,opacity .15s}
+  .btn.primary{background:var(--blue-btn);color:#fff}
+  .btn.primary:hover{background:var(--blue-hover)}
+  .btn.ok{background:#238636;color:#fff}
+  .btn.dim{background:#21262d;color:var(--txt);border:1px solid var(--line)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .log{background:#090d12;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:12px ui-monospace,Consolas,monospace;color:var(--dim);max-height:220px;overflow:auto;display:none}
+  .log.open{display:block}
+  .log .ok{color:var(--green)} .log .bad{color:var(--err)} .log .warn{color:var(--amber)}
+  .box{background:#0b0f14;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:8px}
+  .box .bt{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+  .box .ip{color:var(--dim);font-size:12px;font-family:monospace;margin-top:2px}
+  .box .linkbtn{margin-top:8px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+  .dot.gray{background:var(--gray)} .dot.green{background:var(--green)} .dot.amber{background:var(--amber)}
+  .statusbar{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  h3{font-size:14px;font-weight:600;margin:14px 0 8px}
+  .foot{color:var(--dim);font-size:12px;text-align:center;margin-top:24px}
+  .hint{color:var(--dim);font-size:12px;margin:-6px 0 10px}
+</style>
+</head>
+<body>
+  <header>
+    <h1>Phone Setup Hub</h1>
+    <span id="clock" class="sub" style="margin-bottom:0"></span>
+  </header>
+  <div class="sub">Pair a new phone over WiFi &middot; link Tailscale &middot; live dashboard — all in the browser</div>
+
+  <!-- STEP 1: Pair a new phone -->
+  <section>
+    <h2><span class="step">1</span> Pair a brand-new phone (no USB)</h2>
+    <div class="hint">On the phone: check so <b>Wireless debugging</b> is ON, then open <b>"Pair device with pairing code"</b> and keep it open.</div>
+    <div class="row">
+      <button class="btn ok" id="usbAutoBtn" style="padding:10px 18px">🔌 USB + one click = do EVERYTHING</button>
+    </div>
+    <div class="hint" style="margin:-2px 0 12px">Easiest way: plug the phone into this PC with USB debugging ON, press the green button — it arms 5555, finds the IP, saves it, and links Tailscale by itself.</div>
+    <div class="row">
+      <button class="btn dim" id="scanBtn">Scan network (find the phone)</button>
+    </div>
+    <div class="row">
+      <div class="gr"><label>Pairing endpoint (IP:port) — Scan fills it, or type it yourself</label>
+        <input style="width:100%" id="pairInp" placeholder="192.168.29.125:44767">
+      </div>
+      <div class="gr"><label>Connect endpoint (IP:port) — from main Wireless debugging screen if missing</label>
+        <input style="width:100%" id="connInp" placeholder="192.168.29.125:45678">
+      </div>
+    </div>
+    <div class="row">
+      <div class="gr"><label>6-digit pairing code</label>
+        <input style="width:100%" id="codeInp" maxlength="6" placeholder="123456">
+      </div>
+      <div class="gr"><label>Phone name (goes into wifi-settings.txt)</label>
+        <input style="width:100%" id="nameInp" placeholder="Phone3">
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn primary" id="pairBtn">Pair + Setup</button>
+      <span id="pairState" class="sub" style="margin:0"></span>
+    </div>
+    <div class="log" id="pairLog"></div>
+  </section>
+
+  <!-- STEP 2: Tailscale link -->
+  <section>
+    <h2><span class="step">2</span> Link the phone to Tailscale</h2>
+    <div class="hint">Phone should already be signed into the <b>same Tailscale account</b> as this PC (tap ON in the Tailscale app).</div>
+    <div class="row"><button class="btn dim" id="linkReload">Load matching</button></div>
+    <div id="tailBox"></div>
+    <span id="tailState" class="sub"></span>
+  </section>
+
+  <!-- STEP 3: Dashboard -->
+  <section>
+    <h2><span class="step">3</span> Phones dashboard</h2>
+    <div id="dash"></div>
+  </section>
+
+  <div class="foot">Status refreshes every 3&nbsp;s &middot; localhost only</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function jget(url){ const r=await fetch(url); return r.json(); }
+
+function logLine(html,cls){ const l=$('pairLog'); l.classList.add('open'); l.insertAdjacentHTML('beforeend','<div class="'+cls+'">'+html+'</div>'); l.scrollTop=l.scrollHeight; }
+
+/* ---------- STEP 1: scan + pair ---------- */
+$('usbAutoBtn').onclick=async function(){
+  const b=$('usbAutoBtn'); b.disabled=true; b.textContent='Working...';
+  $('pairLog').classList.add('open'); $('pairLog').innerHTML='';
+  logLine('USB auto-setup running - keep the phone unlocked...','warn');
+  try{
+    const r=await jget('/api/action?name=usb&action=usb-auto');
+    String(r.result).split('\n').forEach((l,i)=>logLine(esc(l), /FAIL|no |cannot|not |error/i.test(l)?'bad':(i===0?'warn':'ok')));
+    if(/connected|added|linked/i.test(r.result)) logLine('DONE - scroll to STEP 3, the phone should be there.','ok');
+  }catch(e){ logLine('failed: '+esc(e.message||e),'bad'); }
+  finally{ b.disabled=false; b.textContent='🔌 USB + one click = do EVERYTHING'; refreshDash(); }
+};
+$('scanBtn').onclick=async function(){
+  $('scanBtn').disabled=true; $('scanBtn').textContent='Scanning...';
+  try{
+    const d=await jget('/api/scan');
+    if(d.pairing.length){
+      $('pairInp').value=d.pairing[0];
+      $('pairInp').placeholder='auto-filled: '+d.pairing[0];
+      const conn=d.connect.join(',');
+      if(conn){ $('connInp').placeholder=conn; $('connInp').value=conn; }
+    }else{
+      $('pairInp').placeholder='192.168.29.125:44767';
+      $('connInp').placeholder='192.168.29.125:45678';
+    }
+    logLine('Scan done. Pairing: <b>'+(d.pairing.join(', ')||'none')+'</b> &middot; Connect found: <b>'+(d.connect.join(', ')||'none')+'</b>','ok');
+  }catch(e){ logLine('Scan failed: '+esc(e), 'bad'); }
+  finally{ $('scanBtn').disabled=false; $('scanBtn').textContent='Scan network (find the phone)'; }
+};
+
+$('pairBtn').onclick=async function(){
+  const pairSel=$('pairInp').value.trim();
+  const ip=pairSel.split(':')[0];
+  const pairport=pairSel.split(':')[1]||'';
+  const connectport=$('connInp').value.trim();
+  const code=$('codeInp').value.trim();
+  const name=$('nameInp').value.trim();
+  if(!ip||!pairport){ logLine('Pick a pairing endpoint from the dropdown first.','bad'); return; }
+  if(!/^\d{6}$/.test(code)){ logLine('Enter the 6-digit code.','bad'); return; }
+  $('pairBtn').disabled=true; $('pairState').textContent='Working - keep the pairing popup open...';
+  $('pairLog').classList.add('open'); $('pairLog').innerHTML='';
+  try{
+    const r=await jget('/api/pair?ip='+encodeURIComponent(ip)+'&pairport='+encodeURIComponent(pairport)
+      +'&connectport='+encodeURIComponent(connectport)+'&code='+encodeURIComponent(code)
+      +'&name='+encodeURIComponent(name));
+    (r.log||[]).forEach(l=>logLine(esc(l), l.match(/FAILED|no connect|could not/i)?'bad':(l.match(/ONLINE|SUCCESS|added|connected/)?'ok':'warn')));
+    if(r.settingsMsg) logLine(esc(r.settingsMsg),'ok');
+    if(r.ok) logLine('READY! Now do STEP 2 (Tailscale) or STEP 3.','ok');
+    else logLine('Not ready yet - scroll up and follow the hint in red/amber.','bad');
+  }catch(e){ logLine('Pair request failed: '+esc(e.message||e),'bad'); }
+  finally{ $('pairBtn').disabled=false; $('pairState').textContent=''; refreshDash(); }
+};
+
+/* ---------- STEP 2: tailscale ---------- */
+$('linkReload').onclick=loadLinks;
+async function loadLinks(){
+  const d=await jget('/api/scan');
+  const targets=(d.settings||[]).filter(s=>!/100\./.test(s.ips));
+  const ts=(d.tailnet||[]);
+  let html='';
+  if(ts.length===0) html+='<div class="hint">No other devices on Tailscale yet. Open the Tailscale app on the phone and turn it ON.</div>';
+  targets.forEach(s=>{
+    html+='<div class="box"><div class="bt"><div><b>'+esc(s.name)+'</b> <span class="ip">'+esc(s.ips)+' : '+esc(s.port)+'</span> <span style="color:var(--amber)">(no 100.x yet)</span></div></div>'
+         +'<div class="row linkbtn" style="margin:0"><select id="ts-' + esc(s.name) + '">'
+         +'<option value="">-- pick its Tailscale device --</option>'
+         +ts.map(t=>'<option value="'+t.ip+'">'+esc(t.name)+' ('+t.ip+')</option>').join('')
+         +'</select>'
+         +'<button class="btn ok" onclick="linkTs(\''+s.name+'\')">Link</button></div></div>';
+  });
+  if(!targets.length) html+='<div class="hint">All phones already have a 100.x IP. Nothing to do here.</div>';
+  $('tailBox').innerHTML=html||'<div class="hint">(load the settings first)</div>';
+}
+async function linkTs(name){
+  const sel=$('ts-'+name); const tsip=sel.value;
+  if(!tsip){ $('tailState').textContent='Pick a device first.'; return; }
+  const r=await jget('/api/tailscale?name='+encodeURIComponent(name)+'&tsip='+encodeURIComponent(tsip));
+  $('tailState').textContent=r.result;
+  refreshDash();
+}
+
+/* ---------- STEP 3: dashboard ---------- */
+async function refreshDash(){
+  let d; try{ d=await jget('/api/status'); }catch(e){ $('dash').innerHTML='<div class="hint">Server unreachable.</div>'; return; }
+  const rows=(d.cards||[]).map(c=>{
+    const okBtn = c.state==='authorize'
+      ? '<button class="btn dim" onclick="act(\''+c.name+'\',\'retry\')">Allow on phone</button>'
+      : '<button class="btn ok" onclick="act(\''+c.name+'\',\'connect\')">Connect</button>';
+    const upBtns = (c.state==='connected')
+      ? '<button class="btn primary" onclick="act(\''+c.name+'\',\'view\')">Mirror</button>'
+        +' <button class="btn dim" onclick="shot(\''+c.name+'\')">Screenshot</button>'
+      : '';
+    return '<div class="box"><div class="bt"><div><span class="dot '+c.dot+'"></span><b>'+esc(c.name)+'</b>'
+      +'<span class="ip"> '+(c.state==='connected'?('⚡ '+esc(c.battery)+' &middot; screen '+esc(c.screen)+' &middot; '+esc(c.wifi)):'')+'</span>'
+      +'<div class="ip">'+esc(c.msg)+'</div></div><div>'+okBtn+' '+upBtns
+      +'<button class="btn dim" onclick="act(\''+c.name+'\',\'rearm\')">Rearm(USB/agent)</button></div></div></div>';
+  }).join('');
+  $('dash').innerHTML = rows || '<div class="hint">No phones in wifi-settings.txt yet. Save one in STEP 1.</div>'
+    + '<div class="statusbar"><button class="btn ok" onclick="usbWifi(this)">🔌 USB → WiFi (re-arm + reconnect, no mirror)</button>'
+    + '<span id="uwMsg" class="sub" style="margin-left:10px;color:var(--green)"></span></div>';
+}
+async function usbWifi(btn){
+  const m=$('uwMsg'); btn.disabled=true; m.textContent='working - keep the phone unlocked...';
+  try{
+    const r=await jget('/api/action?name=usb&action=usb-auto');
+    m.textContent=r.result.split('\n').join(' · ');
+  }catch(e){ m.textContent='failed: '+e; }
+  btn.disabled=false; refreshDash();
+}
+async function act(name,action){
+  const r=await jget('/api/action?name='+encodeURIComponent(name)+'&action='+encodeURIComponent(action));
+  if(r.result) alert('['+name+'] '+r.result);
+  refreshDash();
+}
+async function shot(name){
+  window.open('/api/shot?name='+encodeURIComponent(name)+'&t='+Date.now(),'_blank');
+}
+
+setInterval(()=>{ clock.textContent=new Date().toLocaleTimeString(); },1000);
+refreshDash();
+setInterval(refreshDash,3000);
+</script>
+</body>
+</html>

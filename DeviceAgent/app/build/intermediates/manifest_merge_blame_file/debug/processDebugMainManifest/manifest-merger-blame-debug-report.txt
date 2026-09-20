@@ -1,0 +1,196 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.aman.deviceagent"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="28"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- Core -->
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:5:5-67
+12-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:5:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:6:5-79
+13-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:6:22-76
+14    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+14-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:7:5-76
+14-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:7:22-73
+15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+15-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:8:5-77
+15-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:8:22-74
+16    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+16-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:9:5-89
+16-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:9:22-86
+17    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+17-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:10:5-77
+17-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:10:22-74
+18    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+18-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:11:5-81
+18-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:11:22-78
+19    <uses-permission android:name="android.permission.WAKE_LOCK" />
+19-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:12:5-68
+19-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:12:22-65
+20    <uses-permission android:name="android.permission.VIBRATE" />
+20-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:13:5-66
+20-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:13:22-63
+21
+22    <!-- Re-enable wireless debugging after reboot (grant via: adb pm grant ... WRITE_SECURE_SETTINGS) -->
+23    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+23-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:16:5-80
+23-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:16:22-77
+24
+25    <!-- Optional: torch -->
+26    <uses-permission android:name="android.permission.CAMERA" />
+26-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:19:5-65
+26-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:19:22-62
+27    <uses-permission android:name="android.permission.FLASH" />
+27-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:20:5-64
+27-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:20:22-61
+28
+29    <uses-feature
+29-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:21:5-91
+30        android:name="android.hardware.camera.flash"
+30-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:21:19-63
+31        android:required="false" />
+31-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:21:64-88
+32
+33    <application
+33-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:23:5-97:19
+34        android:name="com.aman.deviceagent.MainApplication"
+34-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:24:9-40
+35        android:allowBackup="true"
+35-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:28:9-35
+36        android:debuggable="true"
+37        android:extractNativeLibs="false"
+38        android:icon="@android:drawable/sym_def_app_icon"
+38-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:26:9-58
+39        android:label="@string/app_name"
+39-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:25:9-41
+40        android:theme="@android:style/Theme.Material.Light.DarkActionBar" >
+40-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:27:9-74
+41        <activity
+41-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:30:9-38:20
+42            android:name="com.aman.deviceagent.MainActivity"
+42-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:31:13-41
+43            android:exported="true"
+43-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:32:13-36
+44            android:launchMode="singleTop" >
+44-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:33:13-43
+45            <intent-filter>
+45-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:34:13-37:29
+46                <action android:name="android.intent.action.MAIN" />
+46-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:35:17-69
+46-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:35:25-66
+47
+48                <category android:name="android.intent.category.LAUNCHER" />
+48-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:36:17-77
+48-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:36:27-74
+49            </intent-filter>
+50        </activity>
+51
+52        <!-- Agent foreground service: hosts the HTTP command server -->
+53        <service
+53-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:41:9-48:19
+54            android:name="com.aman.deviceagent.AgentService"
+54-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:42:13-41
+55            android:exported="false"
+55-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:43:13-37
+56            android:foregroundServiceType="specialUse" >
+56-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:44:13-55
+57            <property
+57-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:45:13-47:83
+58                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+58-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:46:17-76
+59                android:value="personal device remote control &amp; automation" />
+59-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:47:17-80
+60        </service>
+61
+62        <!-- Notification forwarding to the PC bridge -->
+63        <service
+63-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:51:9-59:19
+64            android:name="com.aman.deviceagent.NotifyProxy"
+64-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:52:13-40
+65            android:exported="false"
+65-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:53:13-37
+66            android:label="Notification proxy"
+66-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:54:13-47
+67            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+67-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:55:13-87
+68            <intent-filter>
+68-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:56:13-58:29
+69                <action android:name="android.service.notification.NotificationListenerService" />
+69-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:57:17-99
+69-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:57:25-96
+70            </intent-filter>
+71        </service>
+72
+73        <!-- Accessibility agent: UI automation + screenshots -->
+74        <service
+74-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:62:9-73:19
+75            android:name="com.aman.deviceagent.AccessibilityAgent"
+75-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:63:13-47
+76            android:exported="false"
+76-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:64:13-37
+77            android:label="Agent accessibility"
+77-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:65:13-48
+78            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+78-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:66:13-79
+79            <intent-filter>
+79-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:67:13-69:29
+80                <action android:name="android.accessibilityservice.AccessibilityService" />
+80-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:68:17-92
+80-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:68:25-89
+81            </intent-filter>
+82
+83            <meta-data
+83-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:70:13-72:72
+84                android:name="android.accessibilityservice"
+84-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:71:17-60
+85                android:resource="@xml/accessibility_service_config" />
+85-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:72:17-69
+86        </service>
+87
+88        <!-- Optional device admin for the "lock" command -->
+89        <receiver
+89-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:76:9-86:20
+90            android:name="com.aman.deviceagent.AgentDeviceAdmin"
+90-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:77:13-45
+91            android:exported="false"
+91-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:78:13-37
+92            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+92-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:79:13-70
+93            <meta-data
+93-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:80:13-82:56
+94                android:name="android.app.device_admin"
+94-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:81:17-56
+95                android:resource="@xml/device_admin" />
+95-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:82:17-53
+96
+97            <intent-filter>
+97-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:83:13-85:29
+98                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+98-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:84:17-82
+98-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:84:25-79
+99            </intent-filter>
+100        </receiver>
+101
+102        <!-- Auto-start agent on boot -->
+103        <receiver
+103-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:89:9-95:20
+104            android:name="com.aman.deviceagent.BootReceiver"
+104-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:90:13-41
+105            android:exported="true" >
+105-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:91:13-36
+106            <intent-filter>
+106-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:92:13-94:29
+107                <action android:name="android.intent.action.BOOT_COMPLETED" />
+107-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:93:17-79
+107-->C:\Users\AMAN\Downloads\scrcpy-win64-v4.1\scrcpy-win64-v4.1\DeviceAgent\app\src\main\AndroidManifest.xml:93:25-76
+108            </intent-filter>
+109        </receiver>
+110    </application>
+111
+112</manifest>

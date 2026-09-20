@@ -1,0 +1,20 @@
+# name|ip|port|launch
+# launch: 1 = open scrcpy window, 0 = connect only
+# ip may be a comma-separated list; the first reachable one wins
+#   (list the LAN IP first, then the Tailscale 100.x address)
+# NOTE: LAN IPs can change (DHCP). Tailscale 100.x IPs are stable.
+
+# Phone1 = v2420 (LAN first, Tailscale fallback)
+# UNAUTHORIZED: open Phone1, go to Developer Options > Revoke USB debugging
+# authorizations, reconnect, and tap "Allow" on the popup.
+Phone1|192.168.1.101,1.1.1.1|5555|1
+
+# Phone2 = SM-A155F / Samsung Galaxy A15 (LAN + Tailscale: amans-a15)
+Phone2|192.168.1.102,2.2.2.2|5555|1
+
+# Phone3 = device at 192.168.1.103 -- currently OFFLINE / unreachable.
+# Update this IP from the phone's Wi-Fi settings if it has changed.
+Phone3|192.168.1.103|5555|1
+
+# extra scrcpy flags applied to every device
+SCRCPY_ARGS=--prefer-text --turn-screen-off --stay-awake
